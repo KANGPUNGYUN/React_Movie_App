@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+<script>
+    const root = document.querySelector("#root");
+    // React.createElement(HTMLtag , Property(id, class, style, eventListener(onClick, onMouseEnter, ...)), content)
+
+    const h3 = React.createElement("h3", {id: "title", onMouseEnter: () => console.log("mouse enter")}, "Hello I'm span!");
+
+    const btn = React.createElement("button", {style: {backgroundColor: "tomato"}, onClick: ()=> console.log("i'm clicked")}, "Click Me");
+
+    const container = React.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root);
+</script>
+</html>
