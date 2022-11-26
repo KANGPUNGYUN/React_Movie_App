@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" data-type="module">
+    const root = document.querySelector("#root");
+
+    function App() {
+        // let data = React.useState();
+        // console.log(data); //[undefined, ƒ] 첫번째 인자는 data를 의마하고, 두번째 인자는 함수이다.
+
+        // 0으로 초기값 설정
+        // let data = React.useState(0);
+        // console.log(data); //[0, ƒ] 첫번째 인자는 data를 의마하고, 두번째 인자는 함수이다.
+
+        // JS에서 배열에서 요소들을 꺼내서 이름을 부여하는 방법
+        // const x = [1,2,3];
+        // const [a,b,c] = x;
+        // a // 1
+        // b // 2
+        // c // 3
+
+        let [counter, setCounter] = React.useState(0);
+        // let counter = 0;
+        // function setCounter() {
+        //     counter += 1;
+        //     return counter;
+        // }
+
+        return (
+            <div>
+                <h3>Total Click: {counter}</h3>
+                <button>Click me</button>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App />, root)
+</script>
+</html>

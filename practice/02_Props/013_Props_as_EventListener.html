@@ -9,42 +9,42 @@
 <body>
     <div id="root"></div>
 </body>
-<script src="https://unpkg.com/react@17.0.2/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js" crossorigin></script>
-<!-- React의 props에서는 사용자가 원하는대로 작성된 것을 그대로 보여주기 때문에 props에 어떤 를 쓰더라도 작동됩니다. 따라서, 실수를 줄이기 위해 보다 엄격한 코딩을 하고 싶다면, React의 prop-types를 사용하여 규직을 정의 수 있게 됩니다. -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel" data-type="module">
     
-    function Btn({text, fontSize = 12}) {
+    function Btn({text, onClick}) {
+        // 렌더가 어떻게 되는지 확인해보세요!
+        console.log(text, "was rendered");
         return (
             <button
+                onClick={onClick}
                 style={{
                     backgroundColor: "tomato",
                     color:"white",
                     padding:"10px 20px",
                     border: 0,
                     borderRadius: 10,
-                    fontSize
                 }}
             >
                 {text}
             </button>
         )
     }
-
-    // prop type 설정 방식
-    Btn.propTypes = {
-        text: PropTypes.string.isRequired,
-        fontSize: PropTypes.number,
-    };
-
+    const MemorizesBtn = React.memo(Btn);
     function App() {
-    
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => {
+            setValue("Revert Changes");
+        }
+        // 여기서 onClick은 이벤트리스너가 아닌 Btn 컴포넌트의 하나의 props가 됩니다. 결코 HTML 태그안에 들어가지 않습니다.
+        // 따라서 손수 onClick라는 props를 이벤트리스너로써 정의해주어야 합니다.
         return (
             <div>
-                <Btn text="Save Changes" fontSize={18}/>
-                <Btn text={"Confirm"}/>
+                <MemorizesBtn text={value} onClick={changeValue}/>
+                <MemorizesBtn text="Confirm"/>
             </div>
         );
     }
